@@ -8,7 +8,8 @@ const blue = document.querySelector('.blue');
 const red = document.querySelector('.red');
 const green = document.querySelector('.green');
 const yellow = document.querySelector('.yellow');
-const pontos = document.querySelector('.pontos',);
+const pontos = document.querySelector('.pontos');
+const player = document.querySelector('.nome');
 
 
 let shuffleOrder = () => {
@@ -28,7 +29,7 @@ let lightColor = (element, number) => {
     setTimeout(() => {
         element.classList.add('selected');
     }, number - 250);
-    setTimeout(() => {
+   setTimeout(() => {
         element.classList.remove('selected');
     });
 }
@@ -43,7 +44,7 @@ let checkOrder = () => {
     }
     if(clickedOrder.length == order.length) {
         alert(`\nVocê Acertou! Iniciando próximo nível`);
-        score++
+        score++;
         nextLevel(); 
     }
 }
@@ -75,17 +76,13 @@ if(color == 0) {
 
 //Função para proximo nivel do jogo
 let nextLevel = () => {
-    
-    shuffleOrder();
     pontos.textContent = `Pontuação: ${score}`;
+    shuffleOrder();
 }
 
 //Função para game over
 let gameOver = () => {
-    setTimeout(() => {
-        element.classList.remove('selected');
-    });
-    alert(`\nVocê perdeu o jogo!\nClique em OK para iniciar um novo jogo` );
+    alert('Você perdeu o jogo!\nClique em OK para iniciar um novo jogo' );
     order = [];
     clickedOrder = [];
    
@@ -94,11 +91,13 @@ let gameOver = () => {
 
 //Função de inicio de jogo
 
-let playGame = () =>{
-    
-    alert('Bem vindo ao Genesis! Iniciando novo jogo...')
+let playGame = () => {
+    player.textContent = `Jogador: ${person}`;
+    for(let color = 0; color < 4; color++){
+        createcolorElement(color).classList.remove('selected');
+    };
+    alert('Bem vindo ao Genesis! Iniciando novo jogo...');
     score = 0;
-    pontos.textContent = `Pontuação: ${score}`;
     nextLevel();
 }
 
@@ -109,4 +108,5 @@ yellow.onclick = () => click(2);
 blue.onclick = () => click(3);
 
 
+let person = prompt("Diga seu Nome!");
 playGame();
